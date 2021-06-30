@@ -14,7 +14,7 @@ function App() {
         onStartDateChange={setStartDate} 
         onDurationWeekChange={setDurationWeek}  
       />
-      { startDate && durationWeek ? (
+      { startDate && (durationWeek > 0) ? (
         <Calendar 
           startDate={startDate}
           durationWeek={durationWeek}

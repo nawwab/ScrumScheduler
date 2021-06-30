@@ -4,7 +4,7 @@ function MainForm({onStartDateChange, onDurationWeekChange}) {
     }
 
     function handleDurationWeekChange(e) {
-        onDurationWeekChange(e.target.value);
+        onDurationWeekChange(Number(e.target.value));
     }
 
     return (
