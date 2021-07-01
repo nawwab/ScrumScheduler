@@ -8,7 +8,7 @@ function Header() {
             <h1 className="text-2xl sm:text-4xl font-semibold">Scrum Scheduler</h1>
         </div>
         <p className="text-xl sm:text-2xl font-medium text-center">
-          <a className="underline text-blue-500" href="https://en.wikipedia.org/wiki/Scrum_(software_development)">scrum</a> adalah suatu kerangka kerja berdasarkan konsep <a className="underline text-blue-500" href="https://agilemanifesto.org/iso/id/manifesto.html">agile</a> untuk pengembangan perangkat lunak 
+          <a className="link" href="https://en.wikipedia.org/wiki/Scrum_(software_development)">scrum</a> adalah suatu kerangka kerja berdasarkan konsep <a className="link" href="https://agilemanifesto.org/iso/id/manifesto.html">agile</a> untuk pengembangan perangkat lunak 
         </p>
     </header>
   );

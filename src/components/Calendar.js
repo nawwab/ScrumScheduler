@@ -14,7 +14,7 @@ function DateBox({date}) {
   )
 }
 
-function Calendar({startDate, durationWeek}) {
+function Calendar({durationWeek, scheduleArr, startDate}) {
     // function calculateDate(date, dayCount) {
     //   const temp = new Date(date);
     //   const miliseconds = temp.getTime() + (1000 * 60 * 60 * 24 * dayCount);
@@ -35,7 +35,7 @@ function Calendar({startDate, durationWeek}) {
     }
 
     return (
-      <div className="grid grid-cols-7 gap-2 py-8">
+      <div className="grid grid-cols-7 gap-2">
         {
           allDate(startDate, durationWeek).map((x, idx) => {
             return <DateBox date={x} key={idx}/>
