@@ -7,7 +7,6 @@ import StepCard from "../components/StepCard";
 function Home() {
   const [durationWeek, setDurationWeek] = useState(0);
   const [startDate, setStartDate] = useState();
-  const [startTime, setStartTime] = useState();
   const [scheduleArr, setScheduleArr] = useState([]);
 
   function formCompleted() {
@@ -16,10 +15,6 @@ function Home() {
     }
 
     if (!startDate) {
-      return false;
-    }
-
-    if (!startTime) {
       return false;
     }
 
@@ -45,13 +40,11 @@ function Home() {
       {
         activity: "Daily Standup",
         dayCodes: [1, 2, 3, 4, 5],
-        startTime: startTime,
-        desc: `Daily standup (dimulai jam ${startTime}) adalah rapat harian yang membahas tentang 3 hal: Apa yang sudah dikerjakan, Apa yang akan dikerjakan hari ini, dan halangan apa yang dihadapi saat melakukan pengerjaan`
+        desc: `Daily standup adalah rapat harian yang membahas tentang 3 hal: Apa yang sudah dikerjakan, Apa yang akan dikerjakan hari ini, dan halangan apa yang dihadapi saat melakukan pengerjaan`
       },
       {
         activity: "Weekend",
         dayCodes: [6, 0],
-        startTime: null,
         desc: "Pegawai juga perlu liburan."
       },
       {
@@ -67,17 +60,19 @@ function Home() {
     ];
 
     setScheduleArr(newScheduleArr);
-  }, [durationWeek, startDate, startTime]);
+  }, [durationWeek, startDate]);
 
   return (
     <div className="text-gray-700 p-4">
       <Header />
+      {/* 1 */}
       <StepCard stepNumber={1} cardTitle="Perencanaan">
         <p className="text-center text-lg max-w-xl">
           Sebelum melakukan sprint, rencanakan penambahan apa 
           yang akan dikerjakan (dapat berupa perbaikan bug, penambahan fitur, atau membuat <a className="link" href="https://id.wikipedia.org/wiki/Minimum_viable_product">MVP</a>)
         </p>
       </StepCard>
+      {/* 2 */}
       <StepCard 
         cardTitle={"Menentukan Durasi Sprint"}
         stepNumber={2} 
@@ -86,9 +81,9 @@ function Home() {
         <MainForm
           onDurationWeekChange={setDurationWeek}  
           onStartDateChange={setStartDate}
-          onStartTimeChange={setStartTime}
         />
       </StepCard>
+      {/* 3 */}
       { formCompleted() ? (
           <StepCard end={true}>
             <Calendar 

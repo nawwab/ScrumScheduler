@@ -31,7 +31,6 @@ function DateBox({date, activitiesArr, ActivityOnClick}) {
               key={idx}
               onClick={() => HandleActivityClick(activity)}
             >
-              {activity.startTime ? <p className="text-xs">{activity.startTime}</p> : null}
               <p className="text-sm">{activity.activity}</p>
             </div>
           )
@@ -55,31 +54,32 @@ function Calendar({durationWeek, scheduleArr, startDate}) {
 
     for (let day = 0; day < totalDay; day++) {
       const milisecondsFromStart = temp.getTime() + (1000 * 60 * 60 * 24 * day);
-      const date =  new Date(milisecondsFromStart);
+      const now =  new Date(milisecondsFromStart);
       const activitiesArr = [];
 
       for (const data of scheduleArr) {
         let activityObj = {}
         if (data.startDate) {
-          let startDate = new Date(data.startDate);
+          const startDate = new Date(data.startDate);
 
-          if (startDate.getTime() === date.getTime()) {
+          if (startDate.getTime() === now.getTime()) {
             activityObj.activity = data.activity;
             activityObj.startDate = data.startDate;
           }
-        } else if (data.dayCodes.includes(date.getDay())) {
+        } 
+        
+        if (data.dayCodes && data.dayCodes.includes(now.getDay())) {
           activityObj.activity = data.activity;
         }
 
         if (activityObj.activity) {
-          activityObj.startTime = data.startTime;
           activityObj.desc = data.desc;
           activitiesArr.push(activityObj);
         }
       }
 
       dateCollection.push({
-        date,
+        date: now,
         activitiesArr
       });
     }
@@ -99,7 +99,7 @@ function Calendar({durationWeek, scheduleArr, startDate}) {
     <div>
       {
         clickedActivityObj.activity ? (
-          <div className="mb-4 p-4 bg-green-500 rounded-lg text-center cursor-default text-xl relative">
+          <div className="mb-4 p-4 bg-green-500 rounded-lg text-center cursor-default relative">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
               className="h-5 w-5 text-gray-700 cursor-pointer absolute right-5 top-5" 
@@ -109,12 +109,12 @@ function Calendar({durationWeek, scheduleArr, startDate}) {
             >
               <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>
-            <h1 className="text-2xl font-bold mb-2">{clickedActivityObj.activity}</h1>
+            <h1 className="text-lg font-bold mb-1">{clickedActivityObj.activity}</h1>
             <p className="max-w-xl mx-auto">{clickedActivityObj.desc}</p>
           </div>
         ) : (
           <p className="mb-4 p-4 text-center cursor-default text-xl opacity-50">
-            Click <span className="bg-blue-400 text-sm rounded-md text-white px-1 py-1">kegiatan</span> pada kalendar dibawah untuk menampilkan deskripsi
+            Klik <span className="bg-blue-400 text-sm rounded-md text-white px-1 py-1">kegiatan</span> pada kalendar dibawah untuk menampilkan deskripsi
           </p>
         )
       }
